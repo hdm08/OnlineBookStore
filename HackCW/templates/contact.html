@@ -1,0 +1,129 @@
+{% extends 'base.html'  %}
+
+{% block body %}
+    <!-- Page Content -->
+    <div class="page-heading contact-heading header-text" style="background-image: url(https://legaciesandmemoriespublishing.com/images/slides/1.jpg);">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="text-content">
+              <h4>Lorem ipsum dolor</h4>
+              <h2>Contact Us</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="find-us">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+              <h2>Our Location on Maps</h2>
+            </div>
+          </div>
+          <div class="col-md-8">
+<!-- How to change your own map point
+	1. Go to Google Maps
+	2. Click on your location point
+	3. Click "Share" and choose "Embed map" tab
+	4. Copy only URL and paste it within the src="" field below
+-->
+            <div id="map">
+{#              <iframe src="https://maps.google.com/maps?q=Av.+L%C3%BAcio+Costa,+Rio+de+Janeiro+-+RJ,+Brazil&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed" width="100%" height="330px" frameborder="0" style="border:0" allowfullscreen></iframe>#}
+
+            <div style="width: 100%"><iframe width="100%" height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=SMVIT%20&amp;%20KCDS%20MENS%20HOSTEL+(SMVIT%20COLLEGE)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe><a href="https://www.maps.ie/route-planner.htm">Plan A Journey</a></div>
+
+
+
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="left-content">
+              <h4>About our office</h4>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisic elit. Sed voluptate nihil eumester consectetur similiqu consectetur.<br><br>Lorem ipsum dolor sit amet, consectetur adipisic elit. Et, consequuntur, modi mollitia corporis ipsa voluptate corrupti.</p>
+              <ul class="social-icons">
+                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                <li><a href="#"><i class="fa fa-behance"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="send-message">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+              <h2>Send us a Message</h2>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="contact-form">
+              <form id="contact"  method="post">
+                  {% csrf_token %}
+                <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="username" type="text" class="form-control" id="id_username" placeholder="USERNAME" value="{{user.username}}" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                      <input name="From" type="text" class="form-control" id="id_From" placeholder="E-Mail " value="{{user.email}}" required="">
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <fieldset>
+                        {{ Cform.Subject }}
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12">
+                    <fieldset>
+                        {{ Cform.Message }}
+                    </fieldset>
+                  </div>
+                  <div class="col-lg-12">
+                    <fieldset>
+                      <button type="submit" id="form-submit" class="filled-button" onclick="sendEmail()">Send Message</button>
+                    </fieldset>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <img src="http://demo.phpjabbers.com/free-web-templates/online-store-website-template-105/assets/images/team_01.jpg" class="img-fluid" alt="">
+
+            <h5 class="text-center" style="margin-top: 15px;">John Doe</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+<script src="https://smtpjs.com/v3/smtp.js"></script>
+
+        <script type="text/javascript">
+            function sendEmail() {
+                var x=document.getElementById("id_From").value;
+
+                Email.send({
+                    Host: "smtp.gmail.com",
+                    Username: "harshdeepmahajan@mvaburhanpur.com",
+                    Password: "Deep@.com",
+
+                    To:x,
+
+                    From: "harshdeepmahajan@mvaburhanpur.com",
+                    Subject: "mail related your query in Online Book Store",
+                    Body: "hello thank you for contacting us your problem will be solved soon",
+                })
+            }
+        </script>
+    {% endblock %}

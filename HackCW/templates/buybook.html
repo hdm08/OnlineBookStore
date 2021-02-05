@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block productactive %}active{% endblock %}
+{% block productspan %}<span class="sr-only">(current)</span>{% endblock %}
+{% load cart %}
+
+{% block style %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <!-- Icons font CSS-->
+    <link href="{% static 'filter/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'filter/vendor/font-awesome-4.7/css/font-awesome.min.css'%}" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+    <!-- Vendor CSS-->
+    <link href="{% static 'filter/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'filter/vendor/datepicker/daterangepicker.css' %}" rel="stylesheet" media="all">
+    <!-- Main CSS-->
+    <link href="{% static 'filter/css/main.css' %}" rel="stylesheet" media="all">
+
+    <style>
+        .input--style-2
+        {
+            font-size: 16px;
+            padding: 9px 0;
+            color: #666;
+            font-family: "Roboto", "Arial", "Helvetica Neue", sans-serif;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+
+
+    <!-- Page Content -->
+    <div class="page-heading about-heading header-text" style="background-image: url(http://demo.phpjabbers.com/free-web-templates/book-online-store-website-template-86/images/banner-image-1-1920x500.jpg);">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="text-content">
+                        {#                        <h4>Lorem ipsum dolor sit amet</h4>#}
+                        <h2>Selling Books</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {#        <div class="page-wrapper bg-color-1 p-t-395 p-b-120" >#}
+    <div class="wrapper wrapper--w1070" style="max-width: 1145px;padding-top: 100px;">
+        {#        <div class="card card-7" style="max-width: 2000px;">#}
+        <form class="form" method="get">
+            <div class="card-body">
+
+                <div class="input-group input--medium" style="width: 190px;">
+                    <label class="label" >Book Name</label>
+                    {% render_field filter.form.book_name class="input--style-1"%}
+                </div>
+                <div class="input-group input--medium" style="width: 190px;">
+                    <label class="label">Subject</label>
+                    {% render_field filter.form.subject class="input--style-1" %}
+                </div>
+                <div class="input-group input--medium" style="width: 290px;">
+                    <label class="label">College Name</label>
+                    {% render_field filter.form.college_name class="input--style-1" %}
+                </div>
+                <div class="input-group input--medium" style="width: 290px;">
+                    <label class="label">University Name</label>
+                    {% render_field filter.form.book_university class="input--style-2" %}
+                </div>
+
+                <button class="btn-submit" type="submit" style="line-height: 100px;color: whitesmoke; background: #e90e65;">Filter</button>
+                {#            </div>#}
+            </div>
+        </form>
+
+    </div>
+
+    <div class="products">
+        <div class="container">
+            <div class="row">
+
+                {#                {{ book }}<br><br>#}
+
+
+                {% for b in users%}
+
+
+                    <div class="col-md-4"  id="{{ b.id}}">
+                        <div class="product-item">
+                            <a href=" /p_detail/{{ b.id }}"><img src="{{b.image.url}}" alt="" ></a>
+                            <div class="down-content">
+                                <a href="/p_detail/{{ b.id }}"><h4>{{ b.name }} </h4><small>{{ b.subject }}</small></a>
+
+                                <h6>₹{{ b.price }}</h6>
+                                {#                                <p>College: {{ b.college_name}}</p>#}
+                                <p>University: {{ b.book_university}}</p>
+                                &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                                <div class="row">
+                                    <a href="/p_detail/{{ b.id }}"><button id="qv{{b.id}}" class="btn btn-primary cart" >QuickView</button></a>
+
+                                    {% if  b|is_in_cart:request.session.cart%}
+                                        <div class="row">
+                                            <div class=" col-6-large">
+
+                                                <form method="POST" action="#{{ b.id }}">
+                                                    {% csrf_token %}
+                                                    {#                                                <a href="/p_detail/{{ b.id }}"><button id="qv{{b.id}}" class="btn btn-primary cart">QuickView</button></a>#}
+
+                                                    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <input hidden type="text" value="{{ b.id }}" name="b.id">
+                                                    <input hidden type="text" value='True' name="remove">
+
+                                                    <input  type="submit" value="-" class="btn btn-primary cart"  style="width: 50px;">
+                                                    {{ b|cart_quantity:request.session.cart }}
+
+                                                </form>
+                                            </div>
+
+                                            <div class=" col-6-large">
+
+                                                <form method="POST" action="#{{ b.id }}">
+                                                    {% csrf_token %}
+                                                    <input hidden type="text" value="{{ b.id }}" name="b.id">
+                                                    <input type="submit"  value="+" class="btn btn-primary cart" style="width: 50px;">
+
+                                                </form>
+                                            </div>
+
+                                        </div>
+
+                                    {% else %}
+
+                                        <form method="POST" action="#{{ b.id }}">
+                                            {% csrf_token %}
+{#                                            <a href="/p_detail/{{ b.id }}"><button id="qv{{b.id}}" class="btn btn-primary cart">QuickView</button></a>#}
+                                                    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+
+                                            <input hidden type="text" value="{{ b.id }}" name="b.id">
+                                            <input type="submit" class="btn btn-primary cart" value="Add to Cart" style="width: 120px;">
+
+                                        </form>
+
+
+
+                                    {% endif %}
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                {% endfor %}
+
+
+
+
+
+
+
+
+
+                <div class="col-md-12">
+                    {% if users.has_other_pages %}
+                        <ul class="pages">
+                            {% if users.has_previous %}
+                                <li><a href="?page={{ users.previous_page_number }}">&laquo;</a></li>
+                            {% else %}
+                                <li class="disabled"><span>&laquo;</span></li>
+                            {% endif %}
+                            {% for i in users.paginator.page_range %}
+                                {% if users.number == i %}
+                                    <li class="active"><a><span>{{ i }} <span class="sr-only">(current)</span></span></a></li>
+                                {% else %}
+                                    <li ><a href="?page={{ i }}">{{ i }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                            {% if users.has_next %}
+                                <li><a href="?page={{ users.next_page_number }}">&raquo;</a></li>
+                            {% else %}
+                                <li class="disabled"><span>&raquo;</span></li>
+                            {% endif %}
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script src="{% static 'filter/vendor/jquery/jquery.min.js' %}"></script>
+    <!-- Vendor JS-->
+    <script src="{% static 'filter/vendor/select2/select2.min.js'%}"></script>
+    <script src="{% static 'filter/vendor/jquery-validate/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'filter/vendor/bootstrap-wizard/bootstrap.min.js'%}"></script>
+    <script src="{% static 'filter/vendor/bootstrap-wizard/jquery.bootstrap.wizard.min.js' %}"></script>
+    <script src="{% static 'filter/vendor/datepicker/moment.min.js' %}"></script>
+    <script src="{% static 'filter/vendor/datepicker/daterangepicker.js' %}"></script>
+{#    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>#}
+{#    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>#}
+    <!-- Main JS-->
+    <script src="{% static 'filter/js/global.js' %}"></script>
+{% endblock %}

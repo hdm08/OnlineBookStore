@@ -1,0 +1,40 @@
+{% extends 'base.html'  %}
+
+{% block body %}
+
+
+
+<!-- Page Content -->
+    <div class="page-heading about-heading header-text" style="background-image: url(https://www.hampshire.edu/sites/default/files/header_images/herosmall_96.jpg);">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="text-content">
+              <h4>about us</h4>
+              <h2>our company</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="best-features about-features">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+                <h2>Your Order is Placed You can check status of your Order in Order Section.</h2>
+
+            </div>
+              <a href="{% url 'order' %}"> Click here</a>
+          </div>
+          <div class="col-md-6">
+            <div class="right-image">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}

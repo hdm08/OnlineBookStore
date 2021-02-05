@@ -1,0 +1,312 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Title</title>#}
+{#</head>#}
+{#<body>#}
+{#Login <a href="{% url 'login' %}">login</a>#}
+{#Register <a href="{% url 'register' %}">Register</a>#}
+{##}
+{#</body>#}
+{#</html>#}
+{##}
+{##}
+{##}
+
+{% extends 'base.html' %}
+{% load cart %}
+
+{% block homeactive %} active{% endblock %}
+{% block homespan %}<span class="sr-only">(current)</span>{% endblock %}
+{% block body %}
+    <!-- Page Content -->
+    <!-- Banner Starts Here -->
+    <div class="banner header-text">
+        <div class="owl-banner owl-carousel">
+            <div class="banner-item-01" style="background-image: url(static/images/slider-1.jpg);">
+                <div class="text-content">
+                    <h2>HELLO!!! {{ user.username }}</h2>
+                    <h2>WELCOME TO ONLINE BOOK STORE</h2>
+                </div>
+            </div>
+            <div class="banner-item-02" style="background-image: url(static/images/slider-2.jpg);">
+                <div class="text-content">
+                    <h2>HELLO!!! {{ user.username }}</h2>
+                    <h2>WELCOME TO ONLINE BOOK STORE</h2>
+                </div>
+            </div>
+            <div class="banner-item-03" style="background-image: url(static/images/slider-3.jpg);">
+                <div class="text-content">
+                    <h2>HELLO!!! {{ user.username }}</h2>
+                    <h2>WELCOME TO ONLINE BOOK STORE</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Banner Ends Here -->
+
+    <div class="latest-products">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-heading">
+                        <h2>Featured Products</h2>
+{#                        <a href="{% url 'media' %}">view more <i class="fa fa-angle-right"></i></a>#}
+                    </div>
+                </div>
+                {% for i in x %}
+                    <div class="col-md-4" >
+                        <div class="product-item" >
+                            <a href=" /p_detail/{{ i.id }}"><img src="{{i.image.url}}" alt=""  ></a>
+                            <div class="down-content">
+                                <a href="/p_detail/{{ i.id }}">
+                                    <h4>{{ i.name }} </h4>
+                                    <small>{{ i.subject }}</small></a>
+
+                                <h6>₹{{ i.price }}</h6>
+                                {#                                <p>College: {{ b.college_name}}</p>#}
+                                <p>University: {{ i.book_university}}</p>
+
+                                {#                                <span id="divpr{{i.id}}" class="divpr">#}
+                                {#                                    <button id="pr{{i.id}}" class="btn btn-primary cart">Add To Cart</button>#}
+                                {#                                </span>#}
+
+                                <a href="/p_detail/{{ i.id }}"><button id="qv{{i.id}}" class="btn btn-primary cart" style="width: 300px">QuickView</button></a>
+                                &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                                {#                                <a href="{% url 'login'%}"><button class="btn btn-primary cart">Add To Cart</button></a>#}
+
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+                {#            <div class="col-md-4">#}
+                {#                <div class="product-item">#}
+                {#                    <a href="http://demo.phpjabbers.com/free-web-templates/online-store-website-template-105/product-details.html"><img src="http://demo.phpjabbers.com/free-web-templates/online-store-website-template-105/assets/images/product-2-370x270.jpg" alt=""></a>#}
+                {#                    <div class="down-content">#}
+                {#                        <a href="http://demo.phpjabbers.com/free-web-templates/online-store-website-template-105/product-details.html"><h4>Lorem ipsum dolor sit amet.</h4></a>#}
+                {#                        <h6><small><del>$99.00</del></small>  $79.00</h6>#}
+                {#                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non beatae soluta, placeat vitae cum maxime culpa itaque minima.</p>#}
+                {#                    </div>#}
+                {#                </div>#}
+                {#            </div>#}
+                {##}
+                {#            <div class="col-md-4">#}
+                {#                <div class="product-item">#}
+                {#                    <a href="http://demo.phpjabbers.com/free-web-templates/online-store-website-template-105/product-details.html"><img src="http://demo.phpjabbers.com/free-web-templates/online-store-website-template-105/assets/images/product-3-370x270.jpg" alt=""></a>#}
+                {#                    <div class="down-content">#}
+                {#                        <a href="http://demo.phpjabbers.com/free-web-templates/online-store-website-template-105/product-details.html"><h4>Lorem ipsum dolor sit amet.</h4></a>#}
+                {#                        <h6><small><del>$1999.00</del></small>   $1779.00</h6>#}
+                {#                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt nisi quia aspernatur, harum facere delectus saepe enim?</p>#}
+                {#                    </div>#}
+                {#                </div>#}
+                {#            </div>#}
+                {##}
+                {#            <div class="col-md-4">#}
+                {#                <div class="product-item">#}
+                {#                    <a href="http://demo.phpjabbers.com/free-web-templates/online-store-website-template-105/product-details.html"><img src="http://demo.phpjabbers.com/free-web-templates/online-store-website-template-105/assets/images/product-4-370x270.jpg" alt=""></a>#}
+                {#                    <div class="down-content">#}
+                {#                        <a href="http://demo.phpjabbers.com/free-web-templates/online-store-website-template-105/product-details.html"><h4>Lorem ipsum dolor sit amet.</h4></a>#}
+                {#                        <h6><small><del>$999.00 </del></small> $779.00</h6>#}
+                {#                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum dicta voluptas quia dolor fuga odit.</p>#}
+                {#                    </div>#}
+                {#                </div>#}
+                {#            </div>#}
+                {##}
+                {#            <div class="col-md-4">#}
+                {#                <div class="product-item">#}
+                {#                    <a href="http://demo.phpjabbers.com/free-web-templates/online-store-website-template-105/product-details.html"><img src="http://demo.phpjabbers.com/free-web-templates/online-store-website-template-105/assets/images/product-5-370x270.jpg" alt=""></a>#}
+                {#                    <div class="down-content">#}
+                {#                        <a href="http://demo.phpjabbers.com/free-web-templates/online-store-website-template-105/product-details.html"><h4>Lorem ipsum dolor sit amet.</h4></a>#}
+                {#                        <h6><small><del>$999.00 </del></small> $779.00</h6>#}
+                {#                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum dicta voluptas quia dolor fuga odit.</p>#}
+                {#                    </div>#}
+                {#                </div>#}
+                {#            </div>#}
+                {##}
+                {#            <div class="col-md-4">#}
+                {#                <div class="product-item">#}
+                {#                    <a href="http://demo.phpjabbers.com/free-web-templates/online-store-website-template-105/product-details.html"><img src="http://demo.phpjabbers.com/free-web-templates/online-store-website-template-105/assets/images/product-6-370x270.jpg" alt=""></a>#}
+                {#                    <div class="down-content">#}
+                {#                        <a href="http://demo.phpjabbers.com/free-web-templates/online-store-website-template-105/product-details.html"><h4>Lorem ipsum dolor sit amet.</h4></a>#}
+                {#                        <h6><small><del>$999.00 </del></small> $779.00</h6>#}
+                {#                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum dicta voluptas quia dolor fuga odit.</p>#}
+                {#                    </div>#}
+                {#                </div>#}
+                {#            </div>#}
+            </div>
+        </div>
+    </div>
+
+    <div class="best-features">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-heading">
+                        <h2>About Us</h2>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="left-content">
+                            <p>Donate-a-Book is an initiative by Online Books Store to help bridge the gap between those who want to help children read and those who need books for children. Together we will build a Reading India by making storybooks accessible to thousands of children and spread the joy of reading. Pratham Books was founded with the mission of putting “a book in every child’s hand”.              <ul class="social-icons">
+
+                        <a href="{% url 'about' %}" class="filled-button">Read More</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="right-image">
+                        <img src="https://images.pexels.com/photos/2898170/pexels-photo-2898170.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="services" style="background-image: url(https://prowly-uploads.s3.eu-west-1.amazonaws.com/uploads/landing_page/cover_photo/7269/large_93427518193.jpg);" >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-heading">
+                        <h2>Latest blog posts</h2>
+
+                        <a href="http://demo.phpjabbers.com/free-web-templates/online-store-website-template-105/blog.html">read more <i class="fa fa-angle-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-item">
+                        <a href="#" class="services-item-image"><img src="http://demo.phpjabbers.com/free-web-templates/online-store-website-template-105/assets/images/blog-1-370x270.jpg" class="img-fluid" alt=""></a>
+
+                        <div class="down-content">
+                            {#                            <h4><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit hic</a></h4>#}
+
+                            {#                            <p style="margin: 0;"> John Doe &nbsp;&nbsp;|&nbsp;&nbsp; 12/06/2020 10:30 &nbsp;&nbsp;|&nbsp;&nbsp; 114</p>#}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-item">
+                        <a href="#" class="services-item-image"><img src="http://demo.phpjabbers.com/free-web-templates/online-store-website-template-105/assets/images/blog-2-370x270.jpg" class="img-fluid" alt=""></a>
+
+                        <div class="down-content">
+                            {#                            <h4><a href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit</a></h4>#}
+
+                            {#                            <p style="margin: 0;"> John Doe &nbsp;&nbsp;|&nbsp;&nbsp; 12/06/2020 10:30 &nbsp;&nbsp;|&nbsp;&nbsp; 114</p>#}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-item">
+                        <a href="#" class="services-item-image"><img src="http://demo.phpjabbers.com/free-web-templates/online-store-website-template-105/assets/images/blog-3-370x270.jpg" class="img-fluid" alt=""></a>
+
+                        <div class="down-content">
+                            {#                            <h4><a href="#">Aperiam modi voluptatum fuga officiis cumque</a></h4>#}
+                            {##}
+                            {#                            <p style="margin: 0;"> John Doe &nbsp;&nbsp;|&nbsp;&nbsp; 12/06/2020 10:30 &nbsp;&nbsp;|&nbsp;&nbsp; 114</p>#}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="happy-clients">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-heading">
+                        <h2>Happy Clients</h2>
+
+                        <a href="{% url 'testimonial' %}">read more <i class="fa fa-angle-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="owl-clients owl-carousel text-center">
+                        <div class="service-item">
+                            <div class="icon">
+                                <i class="fa fa-user"></i>
+                            </div>
+                            <div class="down-content">
+                                <h4>John Doe</h4>
+                                <p class="n-m"><em>"Hi, I just wanted to drop you all a line and let you know how pleased I am with your site. I found what I needed easily and the books arrived in a timely manner. Keep up the great work"</em></p>
+                            </div>
+                        </div>
+
+                        <div class="service-item">
+                            <div class="icon">
+                                <i class="fa fa-user"></i>
+                            </div>
+                            <div class="down-content">
+                                <h4>Jane Smith</h4>
+                                <p class="n-m"><em>"I ordered one of the books on a Friday morning and had it in hand on Monday afternoon. The other order I placed came just a few days later. All of the books were exactly what I needed and in exactly the condition described on the web site. "</em></p>
+                            </div>
+                        </div>
+
+                        <div class="service-item">
+                            <div class="icon">
+                                <i class="fa fa-user"></i>
+                            </div>
+                            <div class="down-content">
+                                <h4>Antony Davis</h4>
+                                <p class="n-m"><em>"Thank you so much for your excellent service. Thank you so much for allowing me to purchase my books from this website for a cheap and reasonable price. Thank you so much for having a huge selection of books for me to browse through."</em></p>
+                            </div>
+                        </div>
+
+                        {#                        <div class="service-item">#}
+                        {#                            <div class="icon">#}
+                        {#                                <i class="fa fa-user"></i>#}
+                        {#                            </div>#}
+                        {#                            <div class="down-content">#}
+                        {#                                <h4>John Doe</h4>#}
+                        {#                                <p class="n-m"><em>"Lorem ipsum dolor sit amet, consectetur an adipisicing elit. Itaque, corporis nulla at quia quaerat."</em></p>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
+                        {##}
+                        {#                        <div class="service-item">#}
+                        {#                            <div class="icon">#}
+                        {#                                <i class="fa fa-user"></i>#}
+                        {#                            </div>#}
+                        {#                            <div class="down-content">#}
+                        {#                                <h4>Jane Smith</h4>#}
+                        {#                                <p class="n-m"><em>"Lorem ipsum dolor sit amet, consectetur an adipisicing elit. Itaque, corporis nulla at quia quaerat."</em></p>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
+                        {##}
+                        {#                        <div class="service-item">#}
+                        {#                            <div class="icon">#}
+                        {#                                <i class="fa fa-user"></i>#}
+                        {#                            </div>#}
+                        {#                            <div class="down-content">#}
+                        {#                                <h4>Antony Davis</h4>#}
+                        {#                                <p class="n-m"><em>"Lorem ipsum dolor sit amet, consectetur an adipisicing elit. Itaque, corporis nulla at quia quaerat."</em></p>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="call-to-action">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="inner-content">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h4>If you have any question plz click on Contact Button,<br>
+                                    and drop the line.</h4>
+                            </div>
+                            <div class="col-lg-4 col-md-6 text-right">
+                                <a href="{% url 'contact' %}" class="filled-button">Contact Us</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

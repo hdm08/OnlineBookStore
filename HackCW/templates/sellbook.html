@@ -1,0 +1,94 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Title</title>#}
+{#</head>#}
+{#<body>#}
+{#<form method="POST">#}
+{#    {% csrf_token %}#}
+{#    {{ RegisterForm.as_p }}#}
+{#    <input type="submit">#}
+{##}
+{#</form>#}
+{#</body>#}
+{#</html>#}
+
+
+{% extends 'base.html' %}
+{% block uploadbookactive %}active{% endblock %}
+{% block uploadbookspan %}<span class="sr-only">(current)</span>{% endblock %}
+{% block body %}
+
+    <!-- Page Content -->
+    <div class="page-heading contact-heading header-text" style="background-image: url(https://blog.newrelic.com/wp-content/uploads/book-reading-outside-background-min.jpg);">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="text-content">
+                        <h4></h4>
+                        <h2>SELL BOOK</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="send-message">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-heading">
+                        <h2>UPLOAD BOOK DETAILS</h2>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="contact-form">
+                        <form id="contact" method="post" enctype="multipart/form-data" >
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+
+                                    <fieldset>
+
+
+                                        Book Image:<br>
+                                        {{ SellBookForm.image }}
+<br><br><br>
+
+                                        {{ SellBookForm.name }}
+                                        {{ SellBookForm.subject }}
+                                        {{ SellBookForm.price }}
+                                        {{ SellBookForm.description }}
+                                        {{ SellBookForm.college_name }}
+                                        {{ SellBookForm.book_university }}
+                                        {{ SellBookForm.seller_name }}
+                                        {{ SellBookForm.seller_email }}
+
+                                    </fieldset>
+
+
+
+
+
+
+
+                                </div>
+
+
+                                <br>  <br>
+                                <div class="col-lg-12">
+                                    <fieldset>
+                                        <button type="submit" id="form-submit" class="filled-button">UPLOAD</button>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
